@@ -18,8 +18,9 @@
      var name = restaurants[r].innerText;
      var postCode = postCodes[r].innerText;
      var json =  JSON.parse(curl(name,postCode));
-     var notFoundUrl= "<img src=\"http://coastalurgentcarelouisiana.com/wp-content/uploads/2015/07/food-poisoning.png\"></img>";
-     var rating = json.establishments.length > 0 && json.establishments[0].RatingValue;
+     var notFoundUrl= "<a target=\"_blank\"href=\"http://ratings.food.gov.uk/enhanced-search/en-GB/%5E/" + encodeURI(postCode) +
+         "/Relevance/0/%5E/%5E/1/1/10\"><img src=\"http://coastalurgentcarelouisiana.com/wp-content/uploads/2015/07/food-poisoning.png\"></img></a>";
+     var rating = json.establishments.length == 1 && json.establishments[0].RatingValue;
      var ratingUrl = rating ? "<img src=\"http://ratings.food.gov.uk/images/scores/medium/fhrs_"+ rating +"_en-gb.JPG\"></img>" : notFoundUrl;
      //restaurants[r].innerText = name + " RATING: "+ rating;
      $(restaurants[r]).after(ratingUrl);
